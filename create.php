@@ -10,6 +10,7 @@ if(isset($_POST['create-post'])){
     if(!(str_word_count($title) > 30 || str_word_count($body) > 750)) {
       echo $body.'<br>';
       echo $title;
+      
       if (!preg_match('/^[a-zA-Z\'()!,.\s]+$/', $title)) {
         $error['msg'] = "Invalid title, special characters & numbers not allowed";
       }
