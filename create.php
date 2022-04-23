@@ -14,6 +14,7 @@ if(isset($_POST['create-post'])){
       if (!preg_match('/^[a-zA-Z\'()!,.\s]+$/', $title)) {
         $error['msg'] = "Invalid title, special characters & numbers not allowed";
       }
+      
     } else {
       $error['msg'] = 'Title = 30 words max, Body = 750 words max!';
     }
