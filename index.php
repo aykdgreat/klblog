@@ -38,7 +38,7 @@ include "inc/header.php";
       </div>
       <div class="btn-flex">
         <button class="more-btn"><a href="post.php?post_id=<?php echo $post['post_id'] ?>"> Read More »</a></button>
-        <span class="comments">Comments <span class="comments-count"><?php echo $post['comments']; ?></span></span>
+        <span class="comments">Comments <span class="comments-count"><?php echo rand(0,10) ?></span></span>
       </div>
     </div>
   </section>

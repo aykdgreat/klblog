@@ -13,7 +13,7 @@ if (isset($_POST['create-post'])) {
   $body = htmlspecialchars($_POST['post-body']);
   if (!empty($title) && !empty($tags) &&!empty($body)) {
     if (!(str_word_count($title) > 30 || str_word_count($body) > 750)) {
-      if (preg_match('/^[a-zA-Z\'()!,.\s]+$/', $title)) {
+      if (preg_match('/^[a-zA-Z:_?"-\'()!,.\s]+$/', $title)) {
         $title = mysqli_real_escape_string($conn, $title);
         $tags = mysqli_real_escape_string($conn, $tags);
         $body = mysqli_real_escape_string($conn, $body);

@@ -3,6 +3,7 @@
 include "inc/db.php";
 
 $username = $comment_body = "";
+$error['msg'] = '';
 
 if (isset($_GET['post_id'])) {
   $post_id = $_GET['post_id'];
@@ -23,7 +24,7 @@ if (isset($_POST['submit-comment'])) {
   $post_id = $_GET['post_id'];
   if (!empty($username) && !empty($comment_body)) {
     if (!(str_word_count($username) > 5 || str_word_count($comment_body) > 200)) {
-      if (preg_match('/^[a-zA-Z\'().\s]+$/', $username)) {
+      if (preg_match('/^[a-zA-Z_\'().\s]+$/', $username)) {
         if (!($username == "Admin")) {
 
           $username = mysqli_real_escape_string($conn, $username);
