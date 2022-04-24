@@ -1,43 +1,37 @@
 <?php 
 
+include "inc/isAdmin.php"; 
+include "inc/db.php"; 
+isAdmin();
 
+$sql = "SELECT * FROM posts";
+$result = mysqli_query($conn, $sql);
+if(mysqli_num_rows($result)>0) {
+  $posts = mysqli_fetch_all($result, MYSQLI_ASSOC);
+  // print_r($posts);
+}
 
-
-
-
-
-
-
-
-$pageTitle = "All POsts";
+$pageTitle = "All Posts";
 include "inc/header.php"; 
 ?>
       <div class="card all">
         <h2 class="all-heading">All Posts</h2>
+        
+        <?php
+        if(!empty($posts)):
+        foreach($posts as $post): ?>
           <div class="all-post-list">
             <p class="btn-flex"> 
-              <a href="post.php?id=100">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur saepe expedita.</a>
-              <a href="update.php?id=100">Update</a>
+              <a href="post.php?post_id=<?php echo $post['post_id']; ?>"><?php echo $post['title']; ?></a>
+              <a href="update.php?post_id=<?php echo $post['post_id']?>">Update</a>
             </p>
           </div>
+          <?php endforeach;
+          else: ?>
           <div class="all-post-list">
-            <p class="btn-flex"> 
-              <a href="post.php?id=100">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur saepe expedita.</a>
-              <a href="update.php?id=100">Update</a>
-            </p>
+            <h3>There is no post yet!</h3>
           </div>
-          <div class="all-post-list">
-            <p class="btn-flex"> 
-              <a href="post.php?id=100">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur saepe expedita.</a>
-              <a href="update.php?id=100">Update</a>
-            </p>
-          </div>
-          <div class="all-post-list">
-            <p class="btn-flex"> 
-              <a href="post.php?id=100">Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum consequuntur saepe expedita.</a>
-              <a href="update.php?id=100">Update</a>
-            </p>
-          </div>
+          <?php endif; ?>
       </div>
 
       <aside class="">

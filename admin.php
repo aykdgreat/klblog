@@ -1,22 +1,36 @@
 <?php
-$user = $_GET['user'];
-$pageTitle = $user;
+session_start();
+$error['msg'] = "";
+if (isset($_POST['admin-auth'])) {
+  $auth_input = htmlspecialchars($_POST['admin-pass']);
+  if (!empty($auth_input)) {
+    if ($auth_input == "klblog_admin") {
+      $_SESSION['admin'] = md5('klblog_admin');
+     header('location: all.php');
+    } else {
+      $error['msg'] = "Invalid code, permission denied!";
+    }
+  } else {
+    $error['msg'] = "Enter authentication code!";
+  }
+}
+
+
+$pageTitle = "Admin Login";
 include "inc/header.php";
 ?>
 
-<article>
-  <section class="user-info">
-    <img src="avat.png" alt="user" style="width: 200px; display:block;margin:20px auto;padding:20px;">
-    <div class="user">
-      USER: <h1><?php echo $user; ?></h1>
-      ROLE: <h3><?php if ($user == "Admin") {
-        echo "Administrator";
-      } else {
-        echo "Reader";
-      } ?></h3>
+
+<div class="card">
+  <img src="avat.png" alt="user" style="width: 200px; display:block;margin:20px auto 0;padding:20px;">
+  <form action="" class="create-form" method="post">
+    <div class="input-group">
+      <label for="admin-pass">Admin Authentication Code <span class="error"><?php echo $error['msg']; ?></span></label>
+      <input type="password" class="input-field" name="admin-pass" style="margin-bottom:10px;">
     </div>
-  </section>
-</article>
+    <input type="submit" value="Validate" class="create-btn" name="admin-auth">
+  </form>
+</div>
 
 <aside class="">
   <section class="about-me">
